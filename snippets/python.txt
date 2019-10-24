@@ -1,0 +1,17 @@
+#
+## PYTHON PURO CLIENTE
+#
+import requests
+session = requests.Session()
+method = 'net_version'
+params = []
+payload= {"jsonrpc":"2.0",
+           "method":method,
+           "params":params,
+           "id":1}
+headers = {'Content-type': 'application/json'}
+
+response = session.post('http://10.4.43.84:8545', json=payload, headers=headers)
+
+print('raw json response: {}'.format(response.json()))
+print('network id: {}'.format(response.json()['result']))

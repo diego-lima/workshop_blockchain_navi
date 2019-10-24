@@ -1,0 +1,19 @@
+admin.nodeInfo.enode
+admin.addPeer("enode://fad780b419260d8391a10686690154e7cafec438b2f3f82a81b7258e2e1e0fde73ce955830ff41c50ebce1266e1cb1c33ec8340177afa29a3bc338a34212e29c@10.4.43.83:30303")
+
+eth.defaultAccount = eth.accounts[0]
+personal.unlockAccount(eth.defaultAccount, '', 12000)
+
+eth.defaultAccount = eth.accounts[1]
+personal.unlockAccount(eth.defaultAccount, '', 12000)
+
+eth.coinbase = eth.defaultAccount
+
+eth.getBalance(eth.accounts[0])
+eth.getBalance(eth.accounts[1])
+
+eth.sendTransaction({to: eth.accounts[0], value:1e+12})
+
+
+loadScript('dados.js')
+loadScript('Registry.js')
