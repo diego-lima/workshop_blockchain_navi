@@ -1,16 +1,29 @@
-docker run -it -p 30303:30303 58a426cba18d --datadir /root/workshop_blockchain_navi/rede --networkid=621 --nat extip:10.4.43.83 --syncmode full console
-geth --datadir . --networkid=621 --nat extip:10.4.43.83 --syncmode full console
+#
+## JUPYTER
+#
+docker run -it -d -p 8888:8888 pshchelo/alpine-jupyter-sci-py3
 
-docker container exec -it 53a9b967d8d0 sh
+# RODAR CONTAINER
+
+docker run -it -p 30302:30302  -p 8546:8546  -p 8545:8545 71f1606734bf \
+    --datadir /root/workshop_blockchain_navi/rede \
+    --networkid=621 --nat extip:0.0.0.0 --syncmode full  \
+    --rpc --rpcaddr 0.0.0.0 --rpccorsdomain “*” \
+    --wsport 8546 --wsorigins "*" --wsaddr 0.0.0.0 \
+    --port 30302 \
+    console
+geth --datadir . --networkid=621 --nat extip:10.4.43.83 --syncmode full --wsport 8546 --wsorigins "*" console
+
+docker container exec -it 1c30353fb2f1 sh
 
 admin.nodeInfo.enode
-admin.addPeer("enode://46e598e2215f7fd64fb4fcfd08c60a361abcfb9d4bde033d6640a5070a8e64e7126a932b412aeab13352c4a94017011a18f1677221d072a7de603454ee766829@10.4.43.84:30303")
+admin.addPeer("enode://f7d90c5900583cc33001ec3e73d4f333b6b334bf64b24b219e3b7f51c1e23082b70bf4c88b3da979214cc56f21cdf256ca357d059a02b08619448455dd49c0b0@10.4.43.83:30303")
 
 eth.defaultAccount = eth.accounts[0]
-personal.unlockAccount(eth.defaultAccount)
+personal.unlockAccount(eth.defaultAccount, '', 12000)
 
 eth.defaultAccount = eth.accounts[1]
-personal.unlockAccount(eth.defaultAccount)
+personal.unlockAccount(eth.defaultAccount, '', 12000)
 
 eth.coinbase = eth.defaultAccount
 
