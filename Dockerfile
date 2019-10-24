@@ -3,7 +3,7 @@ LABEL maintainer="ddddiegolima@gmail.com"
 
 
 # Instalando dependências
-RUN apk add git
+RUN apk add git nano
 
 # Montando a rede interna
 RUN cd ~ && \

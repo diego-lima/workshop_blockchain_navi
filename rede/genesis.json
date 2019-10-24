@@ -2,7 +2,7 @@
 	"config": {
 		"chainId": 15,
 		"clique": {
-			"period": 0,
+			"period": 5,
 			"epoch": 30000
 		}
 	},
