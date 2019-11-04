@@ -1,0 +1,3 @@
+[submodule "katacoda-scenarios"]
+	path = katacoda-scenarios
+	url = https://github.com/diego-lima/katacoda-scenarios

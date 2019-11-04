@@ -8,6 +8,8 @@ LABEL maintainer="ddddiegolima@gmail.com"
 # O ip externo sob o qual o cliente será acessível para outros clientes
 # ESSE É OBRIGATÓRIO!
 ENV extip 127.0.0.1
+# O "nome" do nó
+ENV identity no_ethereum
 # O diretório base do cliente
 ENV datadir /root/workshop_blockchain_navi/rede
 # O id da rede que vamos construir
@@ -29,4 +31,5 @@ RUN cd ~ && \
 ENTRYPOINT geth --datadir $datadir \
     --networkid=$networkid --nat extip:$extip --syncmode $syncmode \
     --rpc --rpcaddr $rpcaddr --rpccorsdomain "*" \
-    --wsaddr $rpcaddr --wsorigins "*"
+    --wsaddr $rpcaddr --wsorigins "*" \
+    --identity $identity
