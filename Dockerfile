@@ -1,15 +1,6 @@
 FROM ethereum/client-go:v1.8.27
 LABEL maintainer="ddddiegolima@gmail.com"
 
-# Instalando dependências
-RUN apk add git
-
-# Montando a rede interna
-RUN cd ~ && \
-    git clone https://github.com/diego-lima/workshop_blockchain_navi && \
-    cd workshop_blockchain_navi/rede && \
-    geth --datadir . init genesis.json
-
 #
 ## Variáveis de ambiente
 #
@@ -27,6 +18,15 @@ ENV networkid 621
 ENV syncmode full
 # O ip sob o qual o cliente será acessível para chamadas remotas (HTTP ou Websocket)
 ENV rpcaddr 0.0.0.0
+
+# Instalando dependências
+RUN apk add git
+
+# Montando a rede interna
+RUN cd ~ && \
+    git clone https://github.com/diego-lima/workshop_blockchain_navi && \
+    cd workshop_blockchain_navi/rede && \
+    geth --datadir . init genesis.json
 
 ENTRYPOINT if [ -z "$extip" ]; then export extip=$(hostname -i); fi && \
     geth --datadir $datadir \
